@@ -2,7 +2,7 @@
   "name": "derivitec-python-snippets",
   "displayName": "Derivitec Python",
   "description": "Python snippets for use with the Derivitec Ltd api",
-  "version": "1.0.1",
+  "version": "1.0.0",
   "publisher": "derivitec-ltd",
   "icon": "images/logo.jpg",
   "galleryBanner": {
@@ -10,7 +10,7 @@
     "theme": "dark"
   },
   "engines": {
-    "vscode": "^1.10.0"
+    "vscode": "^1.20.0"
   },
   "license": "SEE LICENSE IN LICENSE.md",
   "repository": {
