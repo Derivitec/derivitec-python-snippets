@@ -2,6 +2,8 @@
 
 This extension for Visual Studio Code adds snippets for Derivitec Api functions written in Python.
 
+![Use Extension](images/snippets.gif)
+
 ## Usage
 
 Type part of a snippet, press `enter`, and the snippet unfolds.
