@@ -7,6 +7,10 @@
   "engines": {
     "vscode": "^1.10.0"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Derivitec/derivitec-python-snippets.git"
+  },
   "categories": [
     "Snippets"
   ],
