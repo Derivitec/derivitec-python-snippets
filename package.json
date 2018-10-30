@@ -2,14 +2,27 @@
   "name": "derivitec-python-snippets",
   "displayName": "Derivitec Python",
   "description": "Python snippets for use with the Derivitec Ltd api",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "publisher": "derivitec-ltd",
+  "icon": "images/logo.jpg",
+  "galleryBanner": {
+    "color": "#0273D4",
+    "theme": "dark"
+  },
   "engines": {
     "vscode": "^1.10.0"
   },
+  "license": "SEE LICENSE IN LICENSE.md",
   "repository": {
     "type": "git",
     "url": "https://github.com/Derivitec/derivitec-python-snippets.git"
+  },
+  "keywords": [
+    "Python",
+    "Derivitec"
+  ],
+  "scripts": {
+    "publish": "vsce publish"
   },
   "categories": [
     "Snippets"
