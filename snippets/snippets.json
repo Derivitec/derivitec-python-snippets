@@ -1,0 +1,38 @@
+{
+    "DerivitecApp": {
+        "prefix": "d-app",
+        "scope": "python",
+        "body": [
+            "from derivitec import *",
+            "",
+            "from datetime import datetime",
+            "",
+            "def main():",
+            "    ${0}",
+            "",
+            "if __name__ == \"__main__\":",
+            "    main()"
+        ],
+        "description": "A derivitec Eq Option object"
+    },
+    "EqOption": {
+        "prefix": "dt-eq-option",
+        "scope": "python",
+        "body": [
+            "tradable = EqOption(",
+            "    underlyer=ric(\"${1:MSFT.OQ}\"),",
+            "    claim_type=${2|EqOption.ClaimType.Call,EqOption.ClaimType.Put|},",
+            "    currency=\"${3|USD,GBP,EUR,JPY|}\",",
+            "    strike=${4:0},",
+            "    settlement_type=${5|EqOption.SettlementType.Cash,EqOption.SettlementType.Physical|},",
+            "    settlement_lag=${6:3},",
+            "    expiration_date=datetime(${7:yyyy}, ${8:MM}, ${9:dd}),",
+            "    calendar=\"${10:XNAS}\"",
+            ")",
+            "",
+            "print tradable.price()",
+            "${0}"
+        ],
+        "description": "A derivitec Eq Option object"
+    }
+}

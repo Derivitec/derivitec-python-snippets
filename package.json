@@ -1,0 +1,21 @@
+{
+  "name": "derivitec-python-snippets",
+  "displayName": "Derivitec Python",
+  "description": "Python snippets for use with the Derivitec Ltd api",
+  "version": "1.0.0",
+  "publisher": "derivitec-ltd",
+  "engines": {
+    "vscode": "^1.10.0"
+  },
+  "categories": [
+    "Snippets"
+  ],
+  "contributes": {
+    "snippets": [
+      {
+        "language": "python",
+        "path": "./snippets/snippets.json"
+      }
+    ]
+  }
+}
