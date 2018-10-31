@@ -21,10 +21,10 @@
         "body": [
             "tradable = EqOption(",
             "    underlyer=ric(\"${1:MSFT.OQ}\"),",
-            "    claim_type=${2|EqOption.ClaimType.Call,EqOption.ClaimType.Put|},",
+            "    claim_type=EqOption.ClaimType.${2|Call,Put|},",
             "    currency=\"${3|USD,GBP,EUR,JPY|}\",",
             "    strike=${4:0},",
-            "    settlement_type=${5|EqOption.SettlementType.Cash,EqOption.SettlementType.Physical|},",
+            "    settlement_type=EqOption.SettlementType.${5|Cash,Physical|},",
             "    settlement_lag=${6:3},",
             "    expiration_date=datetime(${7:yyyy}, ${8:MM}, ${9:dd}),",
             "    calendar=\"${10:XNAS}\"",
@@ -33,6 +33,602 @@
             "print tradable.price()",
             "${0}"
         ],
-        "description": "A derivitec Eq Option object"
+        "description": "A derivitec EqOption object"
+    },
+    "Cash": {
+        "prefix": "dt-cash",
+        "scope": "python",
+        "body": [
+            "tradable = Cash(",
+            "    currency=\"${1|USD,GBP,EUR,JPY|}\", ",
+            "    settlement_date=datetime(${2:yyyy}, ${3:MM}, ${4:dd})",
+            ")",
+            "",
+            "print tradable.price()",
+            "${0}"
+        ],
+        "description": "A derivitec Cash object"
+    },
+    "Margin": {
+        "prefix": "dt-margin",
+        "scope": "python",
+        "body": [
+            "tradable = Margin(",
+            "    currency=\"${1|USD,GBP,EUR,JPY|}\", ",
+            "    expiration_date=datetime(${2:yyyy}, ${3:MM}, ${4:dd})",
+            ")",
+            "",
+            "print tradable.price()",
+            "${0}"
+        ],
+        "description": "A derivitec Margin object"
+    },
+    "EqStock": {
+        "prefix": "dt-eq-stock",
+        "scope": "python",
+        "body": [
+            "tradable = EqStock(code=ric(\"${1:MSFT.OQ}\")),",
+            "",
+            "print tradable.price()",
+            "${0}"
+        ],
+        "description": "A derivitec EqStock object"
+    },
+    "EqVolIndexFutureByCode": {
+        "prefix": "dt-eq-vol-index-future-by-code",
+        "scope": "python",
+        "body": [
+            "tradable = EqVolIndexFutureByCode(code=ric(\"${1:VXZ7}\")),",
+            "",
+            "print tradable.price()",
+            "${0}"
+        ],
+        "description": "A derivitec EqVolIndexFutureByCode object"
+    },
+    "EqFuture": {
+        "prefix": "dt-eq-future",
+        "scope": "python",
+        "body": [
+            "tradable = EqFuture(",
+            "    expiration_date=datetime(${1:yyyy}, ${2:MM}, ${3:dd}),",
+            "    underlyer=ric(\"${4:MSFT.OQ}\")",
+            ")",
+            "",
+            "print tradable.price()",
+            "${0}"
+        ],
+        "description": "A derivitec EqFuture object"
+    },
+    "EqFutureByCode": {
+        "prefix": "dt-eq-future-by-code",
+        "scope": "python",
+        "body": [
+            "tradable = EqFutureByCode(code=bbg(\"${1:ESM9}\")),",
+            "",
+            "print tradable.price()",
+            "${0}"
+        ],
+        "description": "A derivitec EqFutureByCode object"
+    },
+    "EqSwap": {
+        "prefix": "dt-eq-swap",
+        "scope": "python",
+        "body": [
+            "tradable = EqSwap(",
+            "    applied_tax_rate=${1:0.0},",
+            "    equity_asset=ric(\"${2:MSFT.OQ}\"),",
+            "    business_day_convention=BusinessDayConvention.${3|Following,ModifiedPreceding,Preceding,ModifiedFollowing,Actual|},",
+            "    div_payment_style=EqSwap.DivPayment.${4|OnExpiry,OnExpiryReinvested,PassThru,OnNextReset|},",
+            "    end_to_end=${5|True,False|},",
+            "    end_stub=StubType.${6|Long,Short,Null|},",
+            "    expiration_date=datetime(${7:yyyy}, ${8:MM}, ${9:dd}),",
+            "    eq_swap_valuation_type=EqSwap.ValuationType.${10|NPV,Accrual|},",
+            "    initial_fixing_date=datetime(${11:yyyy}, ${12:MM}, ${13:dd}),",
+            "    payment_calendar_name=\"${14:XNAS}\",",
+            "    payment_lag=${15:3},",
+            "    rate_asset_name=\"${16:USDLibor3M}\",",
+            "    roll_date=datetime(${17:yyyy}, ${18:MM}, ${19:dd}),",
+            "    start_stub=StubType.${20|Long,Short,Null|},",
+            "    spread=${21:-0.0004},",
+            "    swap_reset_type=EqSwap.ResetType.${22|FixedNotional,FixedShares|},",
+            "    swap_return_type=EqSwap.ReturnType.${23|TotalReturn,PriceReturn|},",
+            "    tenor=\"${24:3m}\"",
+            ")",
+            "",
+            "print tradable.price()",
+            "${0}"
+        ],
+        "description": "A derivitec EqSwap object"
+    },
+    "EqOptionAmerican": {
+        "prefix": "dt-eq-option-american",
+        "scope": "python",
+        "body": [
+            "tradable = EqOptionAmerican(",
+            "    underlyer = ric(\"${1:MSFT.OQ}\"),",
+            "    claim_type = EqOptionAmerican.ClaimType.${2|Call,Put|},",
+            "    currency = \"${3|USD,GBP,EUR,JPY|}\",",
+            "    strike = ${4:0},",
+            "    settlement_type = EqOptionAmerican.SettlementType.${5|Cash,Physical|},",
+            "    settlement_lag = ${6:3},",
+            "    expiration_date = datetime(${7:yyyy}, ${8:MM}, ${9:dd}),",
+            "    calendar = \"${10:XNAS}\"",
+            ")",
+            "",
+            "print tradable.price()",
+            "${0}"
+        ],
+        "description": "A derivitec EqOptionAmerican object"
+    },
+    "EqVarianceSwap": {
+        "prefix": "dt-eq-variance-swap",
+        "scope": "python",
+        "body": [
+            "tradable = EqVarianceSwap(",
+            "    underlyer=ric(\"${1:MSFT.OQ}\"),",
+            "    currency=\"${2|USD,GBP,EUR,JPY|}\",",
+            "    tenor=\"${3:1d}\",",
+            "    vol_strike=${4:1.00},",
+            "    initial_date=datetime(${5:yyyy}, ${6:MM}, ${7:dd}),",
+            "    expiration_date=datetime(${8:yyyy}, ${9:MM}, ${10:dd}),",
+            "    annualisation_factor=${11:252},",
+            "    settlement_delay=${12:3},",
+            "    calendar_name=\"${13:XNAS}\",",
+            "    include_dividend_jumps=${14|True,False|}",
+            ")",
+            "",
+            "print tradable.price()",
+            "${0}"
+        ],
+        "description": "A derivitec EqVarianceSwap object"
+    },
+    "EqVolIndexFuture": {
+        "prefix": "dt-eq-vol-index-future",
+        "scope": "python",
+        "body": [
+            "tradable = EqVolIndexFuture(",
+            "    expiration_date=datetime(${1:yyyy}, ${2:MM}, ${3:dd}),",
+            "    eq_vol_index_identifier=ric(\"${4:.VIX}\")",
+            ")",
+            "",
+            "print tradable.price()",
+            "${0}"
+        ],
+        "description": "A derivitec EqVolIndexFuture object"
+    },
+    "BondFutureByCode": {
+        "prefix": "dt-bond-future-by-code",
+        "scope": "python",
+        "body": [
+            "tradable = BondFutureByCode(code=ric(\"${1:FVZ7}\")),",
+            "",
+            "print tradable.price()",
+            "${0}"
+        ],
+        "description": "A derivitec BondFutureByCode object"
+    },
+    "IRFutureByCode": {
+        "prefix": "dt-ir-future-by-code",
+        "scope": "python",
+        "body": [
+            "tradable = IRFutureByCode(code=bbg(\"${1:EDZ7}\")),",
+            "",
+            "print tradable.price()",
+            "${0}"
+        ],
+        "description": "A derivitec IRFutureByCode object"
+    },
+    "IRLegFloating": {
+        "prefix": "dt-ir-leg-floating",
+        "scope": "python",
+        "body": [
+            "tradable = IRLegFloating(",
+            "    currency = \"${1|USD,GBP,EUR,JPY|}\",",
+            "    effective_date = datetime(${2:yyyy}, ${3:MM}, ${4:dd}),",
+            "    end_stub = StubType.${5|Long,Short,Null|},",
+            "    expiration_date = datetime(${6:yyyy}, ${7:MM}, ${8:dd}),",
+            "    pay_notional_at_start = ${9|True,False|},",
+            "    rate_asset = \"${10:USDLibor3M}\",",
+            "    receive_notional_at_end = ${11|True,False|},",
+            "    roll_date = datetime(${12:yyyy}, ${13:MM}, ${14:dd}),",
+            "    spread = ${15:0.00},",
+            "    start_stub = StubType.${16|Long,Short,Null|},",
+            ")",
+            "",
+            "print tradable.price()",
+            "${0}"
+        ],
+        "description": "A derivitec IRLegFloating object"
+    },
+    "IRLegFixed": {
+        "prefix": "dt-ir-leg-fixed",
+        "scope": "python",
+        "body": [
+            "tradable = IRLegFixed(",
+            "    business_day_convention = BusinessDayConvention.${1|Following,ModifiedPreceding,Preceding,ModifiedFollowing,Actual|},",
+            "    currency = \"${2|USD,GBP,EUR,JPY|}\",",
+            "    calendar = \"${3|USD,GBP,EUR,JPY|}\",",
+            "    day_count_convention = DayCountConventionMethod.${4|Actual360,Actual365,ActualActual,ThirtyU360,Thirty360,ThirtyE360Isda,ThirtyE360|},",
+            "    effective_date = datetime(${5:yyyy}, ${6:MM}, ${7:dd}),",
+            "    start_stub = StubType.${8|Long,Short,Null|},",
+            "    end_stub = StubType.${9|Long,Short,Null|},",
+            "    end_to_end = ${10|True,False|},",
+            "    expiration_date = datetime(${11:yyyy}, ${12:MM}, ${13:dd}),",
+            "    interest_rate = ${14:0.005},",
+            "    pay_notional_at_start = ${15|True,False|},",
+            "    receive_notional_at_end = ${16|True,False|},",
+            "    roll_date = datetime(${17:yyyy}, ${18:MM}, ${19:dd}),",
+            "    tenor = \"${20:3M}\"",
+            ")",
+            "",
+            "print tradable.price()",
+            "${0}"
+        ],
+        "description": "A derivitec IRLegFixed object"
+    },
+    "IRCapFloor": {
+        "prefix": "dt-ir-cap-floor",
+        "scope": "python",
+        "body": [
+            "tradable = IRCapFloor(",
+            "    currency=\"${1|USD,GBP,EUR,JPY|}\",",
+            "    end_stub=StubType.${2|Long,Short,Null|},",
+            "    start_stub=StubType.${3|Long,Short,Null|},",
+            "    expiration_date=datetime(${4:yyyy}, ${5:MM}, ${6:dd}),",
+            "    roll_date=datetime(${7:yyyy}, ${8:MM}, ${9:dd}),",
+            "    rate_asset_name=\"${10:USDLibor3M}\",",
+            "    effective_date=datetime(${11:yyyy}, ${13:MM}, ${14:dd}),",
+            "    claim_type=IRCapFloor.ClaimType.${15|Payer,Receiver|},",
+            "    strike=${16:0.02}",
+            ")",
+            "",
+            "print tradable.price()",
+            "${0}"
+        ],
+        "description": "A derivitec IRCapFloor object"
+    },
+    "Bond": {
+        "prefix": "dt-bond",
+        "scope": "python",
+        "body": [
+            "tradable = Bond(",
+            "    bond_coupon_frequency=Bond.CouponFrequency.${1|ZeroCoupon,Annual,SemiAnnual,Quarterly,Monthly|},",
+            "    bond_coupon_type=Bond.CouponType.${2|Fixed,NotSet|},",
+            "    bond_day_count_convention=Bond.DayCountConvention.${3|ActualActualIcma,Actual365,Actual360,ActualActualIsda,ActualActualAfb,Thirty360,ThirtyE360,ThirtyE360Isda,NL365|},",
+            "    business_day_convention=BusinessDayConvention.${4|Following,ModifiedPreceding,Preceding,ModifiedFollowing,Actual|},",
+            "    calendar=\"${5|USD,GBP,EUR,JPY|}\",",
+            "    coupon_rate=${6:0.01},",
+            "    currency=\"${7|USD,GBP,EUR,JPY|}\",",
+            "    dated_date=datetime(${8:yyyy}, ${9:MM}, ${10:dd}),",
+            "    end_to_end=${11|True,False|},",
+            "    expiration_date=datetime(${12:yyyy}, ${13:MM}, ${14:dd}),",
+            "    first_coupon_date=datetime(${15:yyyy}, ${16:MM}, ${17:dd}),",
+            "    issuer=\"${18:UST}\",",
+            "    maturity_date=datetime(${19:yyyy}, ${20:MM}, ${21:dd}),",
+            "    penultimate_coupon_date=datetime(${22:yyyy}, ${23:MM}, ${24:dd}),",
+            "    roll_date=datetime(${25:yyyy}, ${26:MM}, ${27:dd}),",
+            "    settlement_lag=${28:3}",
+            ")",
+            "",
+            "print tradable.price()",
+            "${0}"
+        ],
+        "description": "A derivitec Bond object"
+    },
+    "BondByCode": {
+        "prefix": "dt-bond-by-code",
+        "scope": "python",
+        "body": [
+            "tradable = BondByCode(code=isin(\"${1:XS1459407299}\")),",
+            "",
+            "print tradable.price()",
+            "${0}"
+        ],
+        "description": "A derivitec BondByCode object"
+    },
+    "ConvertibleBond": {
+        "prefix": "dt-convertible-bond",
+        "scope": "python",
+        "body": [
+            "tradable = ConvertibleBond(",
+            "    bond_coupon_frequency=Bond.CouponFrequency.${1|ZeroCoupon,Annual,SemiAnnual,Quarterly,Monthly|},",
+            "    bond_coupon_type=Bond.CouponType.${2|Fixed,NotSet|},",
+            "    bond_day_count_convention=Bond.DayCountConvention.${3|ActualActualIcma,Actual365,Actual360,ActualActualIsda,ActualActualAfb,Thirty360,ThirtyE360,ThirtyE360Isda,NL365|},",
+            "    business_day_convention=BusinessDayConvention.${4|Following,ModifiedPreceding,Preceding,ModifiedFollowing,Actual|},",
+            "    calendar=\"${5|USD,GBP,EUR,JPY|}\",",
+            "    coupon_rate=${6:0.01},",
+            "    currency=\"${7|USD,GBP,EUR,JPY|}\",",
+            "    dated_date=datetime(${8:yyyy}, ${9:MM}, ${10:dd}),",
+            "    end_to_end=${11|True,False|},",
+            "    expiration_date=datetime(${12:yyyy}, ${13:MM}, ${14:dd}),",
+            "    first_coupon_date=datetime(${15:yyyy}, ${16:MM}, ${17:dd}),",
+            "    issuer=\"${18:JPGV}\",",
+            "    maturity_date=datetime(${19:yyyy}, ${20:MM}, ${21:dd}),",
+            "    penultimate_coupon_date=datetime(${22:yyyy}, ${23:MM}, ${24:dd}),",
+            "    roll_date=datetime(${25:yyyy}, ${26:MM}, ${27:dd}),",
+            "    settlement_lag=${28:3},",
+            "    asset_identifier=ric(\"${29:MSFT.OQ}\"),",
+            "    conversion_condition=None,",
+            "    callable_conversion_condition=None,",
+            "    puttable_conversion_condition=None,",
+            "    mandatory_conversion_condition=None,",
+            "    dividend_protection_conversion_condition=None",
+            ")",
+            "",
+            "print tradable.price()",
+            "${0}"
+            
+        ],
+        "description": "A derivitec ConvertibleBond object"
+    },
+    "ConvertibleBondByCode": {
+        "prefix": "dt-convertible-bond-by-code",
+        "scope": "python",
+        "body": [
+            "tradable = ConvertibleBondByCode(code=isin(\"${1:XS1459407299}\")),",
+            "",
+            "print tradable.price()",
+            "${0}"
+        ],
+        "description": "A derivitec ConvertibleBondByCode object"
+    },
+    "Ascot": {
+        "prefix": "dt-ascot",
+        "scope": "python",
+        "body": [
+            "tradable = Ascot(",
+            "    asset_swap_spread=${1:0.2},",
+            "    bond_identifier=isin(\"${2:XS1459407299}\"),",
+            "    business_day_convention=BusinessDayConvention.${3|Following,ModifiedPreceding,Preceding,ModifiedFollowing,Actual|},",
+            "    calendar_name=\"${4|USD,GBP,EUR,JPY|}\",",
+            "    coupon_rate=None,",
+            "    day_count_convention=Bond.DayCountConvention.${5|ActualActualIcma,Actual365,Actual360,ActualActualIsda,ActualActualAfb,Thirty360,ThirtyE360,ThirtyE360Isda,NL365|},",
+            "    start_stub=StubType.${6|Long,Short,Null|},",
+            "    end_stub=StubType.${7|Long,Short,Null|},",
+            "    end_to_end=${8|True,False|},",
+            "    expiration_date=datetime(${9:yyyy}, ${10:MM}, ${11:dd}),",
+            "    payment_lag=${12:0},",
+            "    period_str=\"${13:3m}\",",
+            "    rate_asset_name=\"${14:JPYLibor3M}\",",
+            "    roll_date=datetime(${15:yyyy}, ${16:MM}, ${17:dd}),",
+            "    start_date=datetime(${18:yyyy}, ${19:MM}, ${20:dd})",
+            ")",
+            "",
+            "print tradable.price()",
+            "${0}"
+        ],
+        "description": "A derivitec Ascot object"
+    },
+    "FxForward": {
+        "prefix": "dt-fx-forward",
+        "scope": "python",
+        "body": [
+            "tradable = FxForward(",
+            "    fx_pair=\"${1:USDEUR}\",",
+            "    is_spot_contract=${2|True,False|},",
+            "    expiration_date=datetime(${3:yyyy}, ${4:MM}, ${5:dd}),",
+            "    strike=${6:0}",
+            ")",
+            "",
+            "print tradable.price()",
+            "${0}"
+        ],
+        "description": "A derivitec FxForward object"
+    },
+    "FxFuture": {
+        "prefix": "dt-fx-future",
+        "scope": "python",
+        "body": [
+            "tradable = FxFuture(",
+            "    fx_pair=\"${1:EURGBP}\",",
+            "    expiration_date=datetime(${2:yyyy}, ${3:MM}, ${4:dd}),",
+            "    settlement_type=FxTypes.SettlementType.${5|Cash,Physical|}),",
+            "    FxFutureByCode( code = bbg(\"${6:ASZ8}\") ",
+            ")",
+            "",
+            "print tradable.price()",
+            "${0}"
+        ],
+        "description": "A derivitec FxFuture object"
+    },
+    "FxOption": {
+        "prefix": "dt-fx-option",
+        "scope": "python",
+        "body": [
+            "tradable = FxOption(",
+            "    currency=\"${1|USD,GBP,EUR,JPY|}\",",
+            "    fx_pair=\"${2:USDEUR}\",",
+            "    claim_type=FxOption.ClaimType.${3|Call,Put,Forward|},",
+            "    settlement_type=FxOption.SettlementType.${4|Cash,Physical|},",
+            "    expiration_date=datetime(${5:yyyy}, ${6:MM}, ${7:dd}),",
+            "    strike=${8:0},",
+            "    premium_currency=\"${9|USD,GBP,EUR,JPY|}\"",
+            ")",
+            "",
+            "print tradable.price()",
+            "${0}"
+        ],
+        "description": "A derivitec FxFuture object"
+    },
+    "FxKnockin": {
+        "prefix": "dt-fx-knockin",
+        "scope": "python",
+        "body": [
+            "tradable = FxKnockin(",
+            "    fx_pair=\"${1:USDEUR}\",",
+            "    premium_currency=\"${2|USD,GBP,EUR,JPY|}\",",
+            "    currency=\"${3|USD,GBP,EUR,JPY|}\",",
+            "    strike=${4:0},",
+            "    barrier=${5:1},",
+            "    option_barrier_type=FxKnockin.BarrierType.${6|UpAndIn,DownAndIn|},",
+            "    barrier_start_date=datetime(${7:yyyy}, ${8:MM}, ${9:dd}),",
+            "    barrier_end_date=datetime(${10:yyyy}, ${11:MM}, ${12:dd}),",
+            "    expiration_date=datetime(${13:yyyy}, ${14:MM}, ${15:dd}),",
+            "    claim_type=FxTypes.ClaimType.${16|Call,Put|},",
+            "    settlement_type=FxTypes.SettlementType.${17|Cash,Physical|}",
+            ")",
+            "",
+            "print tradable.price()",
+            "${0}"
+        ],
+        "description": "A derivitec FxKnockin object"
+    },
+    "FxKnockout": {
+        "prefix": "dt-fx-knockout",
+        "scope": "python",
+        "body": [
+            "tradable = FxKnockout(",
+            "    fx_pair=\"${1:USDEUR}\",",
+            "    premium_currency=\"${2|USD,GBP,EUR,JPY|}\",",
+            "    currency=\"${3|USD,GBP,EUR,JPY|}\",",
+            "    strike=${4:0},",
+            "    barrier=${5:1},",
+            "    option_barrier_type=FxKnockout.BarrierType.${6|UpAndOut,DownAndOut|},",
+            "    barrier_start_date=datetime(${7:yyyy}, ${8:MM}, ${9:dd}),",
+            "    barrier_end_date=datetime(${10:yyyy}, ${11:MM}, ${12:dd}),",
+            "    expiration_date=datetime(${13:yyyy}, ${14:MM}, ${15:dd}),",
+            "    claim_type=FxTypes.ClaimType.${16|Call,Put|},",
+            "    settlement_type=FxTypes.SettlementType.${17|Cash,Physical|}",
+            ")",
+            "",
+            "print tradable.price()",
+            "${0}"
+        ],
+        "description": "A derivitec FxKnockout object"
+    },
+    "FxDoubleKnockin": {
+        "prefix": "dt-fx-double-knockin",
+        "scope": "python",
+        "body": [
+            "tradable = FxDoubleKnockin(",
+            "    fx_pair=\"${1:USDEUR}\",",
+            "    premium_currency=\"${2|USD,GBP,EUR,JPY|}\",",
+            "    currency=\"${3|USD,GBP,EUR,JPY|}\",",
+            "    strike=${4:0},",
+            "    lower_barrier=${5:0},",
+            "    upper_barrier=${6:1},",
+            "    barrier_start_date=datetime(${7:yyyy}, ${8:MM}, ${9:dd}),",
+            "    barrier_end_date=datetime(${10:yyyy}, ${11:MM}, ${12:dd}),",
+            "    expiration_date=datetime(${13:yyyy}, ${14:MM}, ${15:dd}),",
+            "    claim_type=FxTypes.ClaimType.${16|Call,Put|},",
+            "    settlement_type=FxTypes.SettlementType.${17|Cash,Physical|}",
+            ")",
+            "",
+            "print tradable.price()",
+            "${0}"
+        ],
+        "description": "A derivitec FxDoubleKnockin object"
+    },
+    "FxDoubleKnockout": {
+        "prefix": "dt-fx-double-knockout",
+        "scope": "python",
+        "body": [
+            "tradable = FxDoubleKnockout(",
+            "    fx_pair=\"${1:USDEUR}\",",
+            "    premium_currency=\"${2|USD,GBP,EUR,JPY|}\",",
+            "    currency=\"${3|USD,GBP,EUR,JPY|}\",",
+            "    strike=${4:0},",
+            "    upper_barrier=${5:1},",
+            "    lower_barrier=${6:0},",
+            "    barrier_start_date=datetime(${7:yyyy}, ${8:MM}, ${9:dd}),",
+            "    barrier_end_date=datetime(${10:yyyy}, ${11:MM}, ${12:dd}),",
+            "    expiration_date=datetime(${13:yyyy}, ${14:MM}, ${15:dd}),",
+            "    claim_type=FxTypes.ClaimType.${16|Call,Put|},",
+            "    settlement_type=FxTypes.SettlementType.${17|Cash,Physical|}",
+            ")",
+            "",
+            "print tradable.price()",
+            "${0}"
+        ],
+        "description": "A derivitec FxDoubleKnockout object"
+    },
+    "CmdtyFuture": {
+        "prefix": "dt-cmdty-future",
+        "scope": "python",
+        "body": [
+            "tradable = CmdtyFuture(",
+            "    name=\"${1:Aluminium}\",",
+            "    exchange = \"${2:LME}\",",
+            "    expiration_date = datetime(${3:yyyy}, ${4:MM}, ${5:dd}),",
+            "    settlement_type = CmdtyFuture.SettlementType.${6|Cash,Physical|}",
+            ")",
+            "",
+            "print tradable.price()",
+            "${0}"
+        ],
+        "description": "A derivitec CmdtyFuture object"
+    },
+    "CmdtyFutureByCode": {
+        "prefix": "dt-cmdty-future-by-code",
+        "scope": "python",
+        "body": [
+            "tradable = CmdtyFutureByCode( code = ric(\"${1:CLZ7}\")),",
+            "",
+            "print tradable.price()",
+            "${0}"
+        ],
+        "description": "A derivitec CmdtyFutureByCode object"
+    },
+    "CmdtyOption": {
+        "prefix": "dt-cmdty-option",
+        "scope": "python",
+        "body": [
+            "tradable = CmdtyOption(",
+            "    underlyer = ric(\"${1:CLZ8}\"),",
+            "    currency = \"${2|USD,GBP,EUR,JPY|}\",",
+            "    strike = ${3:0},",
+            "    expiration_date = datetime(${4:yyyy}, ${5:MM}, ${6:dd}),",
+            "    claim_type = CmdtyOption.ClaimType.${7|Call,Put|},",
+            "    futures_expiration_date = datetime(${8:yyyy}, ${9:MM}, ${10:dd}),",
+            "    premium_paid_up_front = ${11|True,False|}",
+            ")",
+            "",
+            "print tradable.price()",
+            "${0}"
+        ],
+        "description": "A derivitec CmdtyOption object"
+    },
+    "CDS": {
+        "prefix": "dt-cds",
+        "scope": "python",
+        "body": [
+            "tradable = CDS(",
+            "    currency = \"${1|USD,GBP,EUR,JPY|}\",",
+            "    start_date = datetime(${2:yyyy}, ${3:MM}, ${4:dd}),",
+            "    first_coupon_date = datetime(${5:yyyy}, ${6:MM}, ${7:dd}),",
+            "    penultimate_coupon_date = datetime(${8:yyyy}, ${9:MM}, ${10:dd}),",
+            "    roll_date = datetime(${11:yyyy}, ${12:MM}, ${13:dd}),",
+            "    expiration_date = datetime(${14:yyyy}, ${15:MM}, ${16:dd}),",
+            "    calendar = \"${17:USA}\",",
+            "    business_day_convention = BusinessDayConvention.${18|Following,ModifiedPreceding,Preceding,ModifiedFollowing,Actual|},",
+            "    coupon_frequency = CreditTypes.CouponFrequency.${19|Annual,SemiAnnual,Quarterly,Monthly|},",
+            "    day_count_convention = CreditTypes.DayCountConvention.${20|ActualActualIcma,Actual365,Actual360,ActualActualIsda,ActualActualAfb,Thirty360,ThirtyE360,ThirtyE360Isda,NL365|},",
+            "    debt_type = CreditTypes.DebtType.${21|Senior,SuperSenior,Other|},",
+            "    default_type = CreditTypes.DefaultType.${22|Undefined,Bankruptcy,FailureToPay,ObligationAcceleration,Repudiation,Restructuring|},",
+            "    settlement_type = CreditTypes.SettlementType.${23|Cash,Physical|},",
+            "    coupon_rate = ${24:0.01},",
+            "    end_to_end = ${25|True,False|},",
+            "    pay_accrual_at_default = ${26|True,False|},",
+            "    protection_at_start_of_day = ${27|True,False|},",
+            "    reference_bond_identifier = isin(\"${28:US712219AG90}\"),",
+            "    settlement_lag = ${29:3}",
+            ")",
+            "",
+            "print tradable.price()",
+            "${0}"
+        ],
+        "description": "A derivitec CDS object"
+    },
+    "CreditIndexByCode": {
+        "prefix": "dt-credit-index-by-code",
+        "scope": "python",
+        "body": [
+            "tradable = CreditIndexByCode(code=bbg(\"${1:SP9I3KCB}\")),",
+            "",
+            "print tradable.price()",
+            "${0}"
+
+        ],
+        "description": "A derivitec CreditIndexByCode object"
     }
 }
